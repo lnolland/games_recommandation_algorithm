@@ -1,0 +1,145 @@
+import json
+
+import requests
+import pandas as pd
+import boto3
+
+def lambda_handler(event, context):
+    # TODO implement
+    
+    #Connect to S3 to get the last number
+    bucket = 'bucket' # already created on S3
+    session = boto3.Session(
+    aws_access_key_id='access-key',
+    aws_secret_access_key='secret key'
+    )
+    #Creating S3 Resource From the Session.
+    s3 = session.resource('s3')
+
+    obj = s3.Object(bucket, 'txt_file.txt')
+    last_number = int(obj.get()['Body'].read())
+    
+    #Get the already existing database before updating
+    initial_df = s3.Object(bucket, 'csv_file.csv')
+    initial_df = pd.read_csv(initial_df.get()['Body'])
+    initial_df.drop('Unnamed: 0', inplace=True, axis=1)
+    
+    #Request the data from the API
+    key = "API key"
+
+    if last_number!=0:
+        last_page = (last_number+1)/20   # we need to get back were we stopped last time we used the algorithm (20 games per page)
+    else:
+        last_page = last_number
+    page = int(last_page)
+
+    games = []
+    nbr = page+20000
+
+    while page < nbr:
+        page += 1
+        print(f"Requesting page {page} out of {nbr}")
+        url = f"https://rawg.io/api/games?key={key}&page={page}"
+        r = requests.get(url).json()
+        currentGames = r['results']
+        games.extend(currentGames)
+        if r['next']==None:
+            page=1
+    
+    #Make the new dataframe
+    df = pd.DataFrame(games)
+    columns = ["id", "slug", "name", "genres", "tags","rating", "ratings_count", "playtime", "platforms", "stores"]
+    df = df[columns]
+
+
+    gamesGenres = df.loc[:,"genres"]     #   list (per game) of list (per genre) of dictionnary (the genre)
+    gamesTags = df.loc[:,"tags"]
+    gamesPlatforms = df.loc[:,"platforms"]
+    gamesStores = df.loc[:,"stores"]
+    
+    #Filter the attributes, so we get a clean dataframe with just what we want
+    for numLine in range(len(gamesGenres)):
+        current_Genre = gamesGenres[numLine]
+        current_Tag = gamesTags[numLine]
+        is_platform_ok = (type(gamesPlatforms[0][0])==str) #   we check if platform is already in the good format or no
+    
+        if not is_platform_ok:  #  the platforms and stores attribute are made a way it need it's own check to see if we need to change it or not
+            current_Platform = [d['platform'] for d in gamesPlatforms[numLine]] # platforms and stores are made like list of dictionary of dicitonary unlike the others wich are just list of dictionary
+            current_Store = [d['store'] for d in gamesStores[numLine]]
+    
+        if(type(current_Genre[0]) is dict): #   we verify if the line where already flitered or not
+            current_genreName = [d['name'] for d in current_Genre]
+            df.iat[numLine, df.columns.get_loc('genres')] = current_genreName
+
+            current_tagName = [d['name'] for d in current_Tag]
+            df.iat[numLine, df.columns.get_loc('tags')] = current_tagName
+
+            current_platformName = [d['name'] for d in current_Platform]
+            df.iat[numLine, df.columns.get_loc('platforms')] = current_platformName
+
+            current_storeName = [d['name'] for d in current_Store]
+            df.iat[numLine, df.columns.get_loc('stores')] = current_storeName
+    
+    #Verify if we don't have already the games, if we have, update the old data with the new dataframe 
+    is_already = 0
+    for i in range(len(initial_df["id"])):
+        if (initial_df["id"][i] == df["id"][0]):
+            is_already = 1
+            idx_same = i
+
+    if is_already:
+        for col in df:
+            for row in range(len(df["id"])):
+                initial_df[col][idx_same + row] = df[col][row]
+
+        df_result = initial_df
+    
+    # merge the 2 dataframe if the new data is not already in the old one
+    if not is_already:
+        frames = [initial_df, df]
+        df_result = pd.concat(frames)
+    
+    #Convert the dataframe into a csv file
+    df_result.to_csv('/tmp/games.csv')
+    print(df_result)
+    
+    #Transfer the csv file into the s3 bucket
+    bucket = 'bucket' # already created on S3
+
+    session = boto3.Session()
+
+    s3 = session.resource('s3')
+
+    object = s3.Object(bucket, 'csv_file.csv')
+
+    result = object.put(Body=open('/tmp/games.csv', 'rb'))
+
+    res = result.get('ResponseMetadata')
+
+    if res.get('HTTPStatusCode') == 200:
+        print('File Uploaded Successfully')
+    else:
+        print('File Not Uploaded')
+        
+    #Make/update a file with the last id database, we need that number to restart the function to the good page when getting the data
+    if is_already: # we set the idx of the last game updated differently if the dataframe is on a loop or if it's still not 
+        last_id = idx_same + df.shape[0]-1
+    else:
+        last_id=df_result.shape[0]
+    
+    open('/tmp/txt_file.txt', 'w').write(str(last_id))
+    
+    object = s3.Object(bucket, 'number_last_game.txt')
+
+    result = object.put(Body=open('/tmp/txt_file.txt', 'rb'))
+
+    res = result.get('ResponseMetadata')
+    if res.get('HTTPStatusCode') == 200:
+        print('File Uploaded Successfully')
+    else:
+        print('File Not Uploaded')
+            
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
