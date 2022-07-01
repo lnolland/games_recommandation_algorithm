@@ -173,18 +173,18 @@ def display_res(scores):
 def main():
     
     # get the database / dataframe from s3
-    bucket = 'rawgapi-useast1' # already created on S3
+    bucket = 'bucket name' # already created on S3
     session = boto3.Session(
-    aws_access_key_id='aws key',
-    aws_secret_access_key='4iY+aws secret key'
+    aws_access_key_id='aws key' #   Put your aws key here
+    aws_secret_access_key='aws secret key'  # Put your aws secret key here
     )
     #Creating S3 Resource From the Session.
     s3 = session.resource('s3')
-    df = s3.Object('rawgapi-useast1', 'games_data.csv')
+    df = s3.Object(bucket, 'csv_file_name.csv') #   Put your csv file name here
     df = pd.read_csv(df.get()['Body'])
     df.drop('Unnamed: 0', inplace=True, axis=1)
 
-    obj = s3.Object('rawgapi-useast1', 'number_last_game.txt')
+    obj = s3.Object(bucket, 'txt_file_name.txt') #  Put your txt file name here
     df_len = int(obj.get()['Body'].read())
 
 
