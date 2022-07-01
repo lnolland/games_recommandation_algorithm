@@ -175,8 +175,8 @@ def main():
     # get the database / dataframe from s3
     bucket = 'rawgapi-useast1' # already created on S3
     session = boto3.Session(
-    aws_access_key_id='AKIA4IQGL3OG2XXWUCUA',
-    aws_secret_access_key='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'
+    aws_access_key_id='aws key',
+    aws_secret_access_key='4iY+aws secret key'
     )
     #Creating S3 Resource From the Session.
     s3 = session.resource('s3')
