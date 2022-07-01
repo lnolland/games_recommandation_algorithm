@@ -1,35 +1,35 @@
-<mxfile host="app.diagrams.net" modified="2022-07-01T20:39:44.729Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="ugWN72UU6T77IVXZjudM" version="20.0.4" type="github">
+<mxfile host="app.diagrams.net" modified="2022-07-01T20:57:32.453Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="Y6M-UWXcJ_DlWnxWch3-" version="20.0.4" type="github">
   <diagram id="rYxhGjhGlnUfPGOYWdaJ" name="Page-1">
-    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2370" dy="1270" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="5HtMou1Jmjs9LnXUQxlP-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=24;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="414" y="880" as="targetPoint" />
-            <mxPoint x="414" y="725" as="sourcePoint" />
+            <mxPoint x="413" y="930" as="targetPoint" />
+            <mxPoint x="413" y="775" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="5HtMou1Jmjs9LnXUQxlP-11" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;pointerEvents=1;fontSize=20;rotation=-90;" vertex="1" parent="1">
-          <mxGeometry x="343.25" y="45.75" width="141.5" height="350" as="geometry" />
+          <mxGeometry x="342.25" y="95.75" width="141.5" height="350" as="geometry" />
         </mxCell>
         <mxCell id="5HtMou1Jmjs9LnXUQxlP-15" value="games of the database we made" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;fillColor=#eeeeee;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="40" y="30" width="280" height="120" as="geometry" />
+          <mxGeometry x="39" y="80" width="280" height="120" as="geometry" />
         </mxCell>
         <mxCell id="5HtMou1Jmjs9LnXUQxlP-16" value="game the user want to find an equivalent (input)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;fillColor=#cdeb8b;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="500" y="40" width="290" height="110" as="geometry" />
+          <mxGeometry x="499" y="90" width="290" height="110" as="geometry" />
         </mxCell>
         <mxCell id="5HtMou1Jmjs9LnXUQxlP-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=24;" edge="1" parent="1" source="5HtMou1Jmjs9LnXUQxlP-18" target="5HtMou1Jmjs9LnXUQxlP-19">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="5HtMou1Jmjs9LnXUQxlP-18" value="Assign a score to each games of the database&lt;br&gt;(the higher the score the more chance they can be recommended)" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="213.5" y="290" width="401" height="180" as="geometry" />
+          <mxGeometry x="212.5" y="340" width="401" height="180" as="geometry" />
         </mxCell>
         <mxCell id="5HtMou1Jmjs9LnXUQxlP-19" value="&lt;span style=&quot;font-size: 23px;&quot;&gt;Increase the score of a game for every common point they share with the input&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="225" y="580" width="377" height="150" as="geometry" />
+          <mxGeometry x="224" y="630" width="377" height="150" as="geometry" />
         </mxCell>
         <mxCell id="5HtMou1Jmjs9LnXUQxlP-22" value="Recommend the games with the highest score" style="rounded=1;whiteSpace=wrap;html=1;fontSize=24;fillColor=#cce5ff;strokeColor=#36393d;" vertex="1" parent="1">
-          <mxGeometry x="249" y="880" width="330" height="140" as="geometry" />
+          <mxGeometry x="248" y="930" width="330" height="140" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
