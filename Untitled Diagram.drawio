@@ -1,1 +1,36 @@
-<mxfile host="app.diagrams.net" modified="2022-07-01T18:50:19.250Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" version="20.0.4" etag="vcEapXoLn9BGDIkCMMkd" type="github"><diagram id="rYxhGjhGlnUfPGOYWdaJ">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-07-01T19:05:20.968Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36" etag="duhkDZbONrxIE-frwlc5" version="20.0.4" type="github">
+  <diagram id="rYxhGjhGlnUfPGOYWdaJ" name="Page-1">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="5HtMou1Jmjs9LnXUQxlP-1" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;game the user want to find an equivalent (input)&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="20" width="280" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="5HtMou1Jmjs9LnXUQxlP-14" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=24;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="5HtMou1Jmjs9LnXUQxlP-2" target="5HtMou1Jmjs9LnXUQxlP-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="414" y="870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="5HtMou1Jmjs9LnXUQxlP-2" value="&lt;font style=&quot;font-size: 23px;&quot;&gt;Increase the score of a game for every common point they share with the input&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="222" y="585" width="384" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="5HtMou1Jmjs9LnXUQxlP-3" value="games of the database we made" style="rounded=0;whiteSpace=wrap;html=1;fontSize=24;" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="290" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="5HtMou1Jmjs9LnXUQxlP-11" value="" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.annotation_2;align=left;labelPosition=right;pointerEvents=1;fontSize=20;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="346.5" y="42.5" width="135" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="5HtMou1Jmjs9LnXUQxlP-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontSize=24;" edge="1" parent="1" source="5HtMou1Jmjs9LnXUQxlP-4" target="5HtMou1Jmjs9LnXUQxlP-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="5HtMou1Jmjs9LnXUQxlP-4" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;assign a score to each games of the database: the higher the score the more chance they can be recommended&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=26;" vertex="1" parent="1">
+          <mxGeometry x="221" y="280" width="385" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="5HtMou1Jmjs9LnXUQxlP-5" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Recommend the games with the highest score&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;fontSize=20;" vertex="1" parent="1">
+          <mxGeometry x="225" y="880" width="378" height="120" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
