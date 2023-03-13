@@ -3,8 +3,6 @@ import pandas as pd
 import boto3
 import sys
 
-
-
 def format_str(old_str):
     '''Clean the string and return an array, we use this function in format_df'''
     new_string = old_str[2:(len(old_str)-2)] # First, we remove the edges of the strings
@@ -17,7 +15,7 @@ def format_df(df, df_len):
     for i in range(df_len): # for each game 
         
         old_string = df["genres"][i] # The string looks like this: "['Action', 'Adventure']"
-        genres = format_str(old_string) # We format the strings of the game
+        genres = format_str(old_string)
 
         old_string = df["tags"][i]
         tags = format_str(old_string)
@@ -64,26 +62,26 @@ def algorithm(df, df_len, user_input):
         rate = abs(user_input["rating"] - df["rating"][i])    # We store the gap between both rate
 
 
-        if(rate == 0):  # Then we increase the score depending on the gap      
-            current_score += 100       
+        if(rate == 0):  # Then we increase the score the more the gap is low        
+            current_score += 100       # Il faut changer la valeur pour ajuster l'algorithm
         elif(rate <= 1):
-            current_score += 75       
+            current_score += 75       # Il faut changer la valeur pour ajuster l'algorithm
         elif(rate <= 2):
-            current_score += 50       
+            current_score += 50       # Il faut changer la valeur pour ajuster l'algorithm
         elif(rate <= 3):
-            current_score += 25       
+            current_score += 25       # Il faut changer la valeur pour ajuster l'algorithm
 
 
         rate = abs(user_input["ratings_count"] - df["ratings_count"][i])  # We store the gap between both number of rate
 
-        if(rate == user_input["ratings_count"]/5):  # Then we increase the score depending on the gap     
-            current_score += 100       
+        if(rate == user_input["ratings_count"]/5):  # Then we increase the score the more the gap is low        
+            current_score += 100       # Il faut changer la valeur pour ajuster l'algorithm
         elif(rate <= user_input["ratings_count"]/4):
-            current_score += 75       
+            current_score += 75       # Il faut changer la valeur pour ajuster l'algorithm
         elif(rate <= user_input["ratings_count"]/3):
-            current_score += 50       
+            current_score += 50       # Il faut changer la valeur pour ajuster l'algorithm
         elif(rate <= user_input["ratings_count"]/2):
-            current_score += 25       
+            current_score += 25       # Il faut changer la valeur pour ajuster l'algorithm
 
         # The score dicitonary has the slug of the game as key, the score of the game as first value and the name as second value
         score[df["slug"][i]] = [current_score, df["name"][i]]
@@ -104,7 +102,9 @@ def multiple_algorithm(df, df_len, user_inputs):
         scores[user_inputs[i]["slug"]] = algorithm(df, df_len, user_inputs[i])
 
     
-    for score in scores:    # sum all the scores into one dicitonnary
+    keys = list(scores.keys())
+    for i in range(len(keys)):  # for every game of the user
+        score = scores[keys[i]]    # sum all the scores into one dicitonnary
         slug_list = score.keys()
 
         for slug in slug_list:
@@ -117,18 +117,17 @@ def multiple_algorithm(df, df_len, user_inputs):
         firstloop = 0
 
     return res
-                
-
 
 def search(df, df_len, user_input):
     '''Get the user_input and return the index in df of which game it correspond (work for a single input)'''
-
+    
     res = {}
+
     for i in range(df_len):
         if (df["name"][i] == user_input):
             for key in df:
                 res[key] = df[key][i]
-
+        
     if(res == {}):
         sys.exit("The input is not in the dataframe")
         
@@ -154,58 +153,47 @@ def display_res(scores):
 
     # Display the firsts 50 results
     loop = 0
-    nbrs_res = 20
-    print("Firsts ", nbrs_res," results:")
+    print("Firsts 50 results:")
     for score in sorted_scores:
-        if loop < nbrs_res:
-            print(score)
+        if loop < 50:
+            print(score[1])
         loop += 1
 
+# get the database / dataframe from s3
+bucket = 'bucket-name' # put the name of your bucket (already created)
+session = boto3.Session(
+aws_access_key_id='key', # put your key
+aws_secret_access_key='secret-key' # put your secret key
+)
+#Creating S3 Resource From the Session.
+s3 = session.resource('s3')
+df = s3.Object(bucket, 'file_name.csv') # put your csv file name here
+df = pd.read_csv(df.get()['Body'])
+df.drop('Unnamed: 0', inplace=True, axis=1)
 
 
+obj = s3.Object(bucket, 'number_last.txt')
+df_len = int(obj.get()['Body'].read()) # get the number of the last updated line of the df
 
-def main():
-    
-    # get the database / dataframe from s3
-    bucket = 'bucket name' # already created on S3
-    session = boto3.Session(
-    aws_access_key_id='aws key' #   Put your aws key here
-    aws_secret_access_key='aws secret key'  # Put your aws secret key here
-    )
-    #Creating S3 Resource From the Session.
-    s3 = session.resource('s3')
-    df = s3.Object(bucket, 'csv_file_name.csv') #   Put your csv file name here
-    df = pd.read_csv(df.get()['Body'])
-    df.drop('Unnamed: 0', inplace=True, axis=1)
+df = format_df(df, df_len)
 
-    obj = s3.Object(bucket, 'txt_file_name.txt') #  Put your txt file name here
-    df_len = int(obj.get()['Body'].read())
+# get the inputs of the user
 
+user_nbr = int(input("How many games do you wish to put in entry ?"))
 
-    df = format_df(df, df_len)
+user_str = []
+for i in range(user_nbr):
+    user_str.append(input("Write a game's name:"))
 
+if(user_nbr > 1):
+    user_games = multiple_search(df, df_len, user_str)
+else:
+    user_games = search(df, df_len, user_str[0])
 
-    # get the inputs of the user
-    user_str = []
-    user_nbr = int(input("How many games do you want to specify in the algorithm ?"))
+if(user_nbr > 1):
+    scores = multiple_algorithm(df, df_len, user_games)
+else:
+    scores = algorithm(df, df_len, user_games)
 
-    # use the algorithm and display the results
-    for i in range(user_nbr):
-        user_str.append(input("Enter the name of the game"))
-
-
-    scores = {}
-
-    if(user_nbr > 1):
-        user_games = multiple_search(df, df_len, user_str[0])
-        scores = multiple_algorithm(df, df_len, user_games)
-    elif( user_nbr == 1):
-        user_game = search(df, df_len, user_str)
-        scores = algorithm(df, df_len, user_game)
-
-    
-    display_res(scores)
-
-
-main() 
+display_res(scores)
 
