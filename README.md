@@ -70,14 +70,12 @@ METTRE LE CODE PERMETTANT DE PRENDRE LES DONNEES
 
 ## Results
 
+The programm will ask how many games the user want to input, then ask what are the names of the games the user want to find game alike.
+Finally, the programm will display the first 50 games that have the best "matching score" according to the algorithm.
+A game recommanded is display this way: [score, 'name of the game']
+Here is an example with 1 game named Grand Theft Auto V as input:
 <br><br><br>
-METTRE UNE IMAGE DE L'ENTREE DE L'UTILISATEUR
-<br><br><br>
-
-Then the algorithm will display the results like this:
-
-<br><br><br>
-METTRE UNE IMAGE DE LA SORTIE PAR RAPPORT A L'ENTREE
+![Capture_result](https://user-images.githubusercontent.com/127619531/224831232-05647360-d843-4939-a72e-d34dba8639a2.PNG)
 <br><br><br>
 
 
