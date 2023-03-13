@@ -49,23 +49,13 @@ MONTRER CMNT FAIRE LE CLOUDWQTCH???????
 Finally, we can make our algorithm. We choosed a simple model which works like this:
 
 <br><br><br>
-METTRE UN SCHEMA DU FONCTIONNEMENT DU SYSTEME DE RECOMPENSE (SCORE)
-<br><br><br>
-
-It can be translated like this in python:
-<br><br><br>
-METTRE UNE PARTIE DU CODE POUR MONTRER COMMENT MARCHE LA RECOMPENSE (LE SCORE)
+![Algo_diagram](https://user-images.githubusercontent.com/127619531/224841132-41e092c0-54b5-4046-bde9-d80a455e74ed.png)
 <br><br><br>
 
 
 
 ### 4. Access the data with the algorithm and provide an output to the user's inputs:
-We need to get the data from the database, get the user's input and then use the algorithm in order to display the results.
-We get the data and the input like this:
-
-<br><br><br>
-METTRE LE CODE PERMETTANT DE PRENDRE LES DONNEES
-<br><br><br>
+We get the data from the database, get the user's input and then use the algorithm in order to display the results. Which bring us to the final section:
 
 
 ## Results
