@@ -1,7 +1,7 @@
 # Games_Recommendation_Algorithm
 
 ## How the project works:
-![recommandation_diagram](https://user-images.githubusercontent.com/127619531/224561655-c6adcac4-3761-4b98-a2aa-1c485ca23007.png)
+![recommandation_diagram](https://user-images.githubusercontent.com/127619531/226174855-2faee863-542f-4266-a91d-15245510d41f.png)
 
 
 
@@ -40,7 +40,7 @@ We also need to allow access the bucket we made to the function so we need to us
 Now we can automate the call of the function so the function is called monthly, since the database needs to be up to date (and also because we can't do more than 20000 request to the rawg API since we use the free version). In order to do this, we put the code in a lambda function with the layer AWSDataWrangler-Python39 and use a trigger made with aws cloudwatch like this:
 
 <br><br><br>
-![database_cleaning_cloudwatch](https://user-images.githubusercontent.com/127619531/226174242-02349720-da20-4b74-be6e-1469ea551d1f.png)
+![database_cleaning_cloudwatch](https://user-images.githubusercontent.com/127619531/226174946-aaec8f5d-a368-4be3-8257-fb859b27b9c3.png)
 <br><br><br>
 
 
@@ -57,6 +57,9 @@ Finally, we can make our algorithm. We choosed a simple model which works like t
 ### 4. Access the data with the algorithm and provide an output to the user's inputs:
 We get the data from the database, get the user's input and then use the algorithm in order to display the results. Which bring us to the final section:
 
+<br><br><br>
+![result](https://user-images.githubusercontent.com/127619531/226174690-902c89c6-8e12-44a8-ad42-08c84b15fc3c.png)
+<br><br><br>
 
 ## Results
 
