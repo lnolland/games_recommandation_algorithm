@@ -25,14 +25,14 @@ We can break down the making of the algorithm in 4 parts:<br><br>
 Firstly, we need to find an API to collect the data we will use. In this project, I used the rawg API, you can make your own profile and get your own key to access to the API here: https://rawg.io/apidocs. Now we need to get the data and clean it, here is a part of the code I made to get and clean the data:
 
 <br><br><br>
-![database_cleaning](https://user-images.githubusercontent.com/127619531/226173580-040ad8f6-ec3e-487d-a193-c00b72f4ecac.png)
+![cleaned_data](https://user-images.githubusercontent.com/127619531/226174343-991c03b8-44a2-45ad-9e39-39946d44a64a.png)
 <br><br><br>
 
 ### 2. Store the data somewhere we can access it:
 Secondly, we need to store the data somewhere so we have a good and clean database. For this purpose, I used aws s3 using my own private bucket. This allowed me to use aws lambda and aws cloudwatch to get the data and clean it monthly. But before we make the code, we need to upload a starting csv file in the bucket, the one we used is in the S3_restart folder in the repository. After we have created the bucket and uploaded the csv file, we used this code to store the data in the bucket in the csv file:
 
 <br><br><br>
-METTRE UNE PARTIE DU CODE POUR METTRE LES DONNEES DANS LE BUCKET
+![database_cleaning](https://user-images.githubusercontent.com/127619531/226173776-b0588771-e2d7-4c75-bcf9-a18c25068471.png)
 <br><br><br>
 
 We also need to allow access the bucket we made to the function so we need to use an aws IAM role so we can access the bucket and access the csv file in our code.
@@ -40,7 +40,7 @@ We also need to allow access the bucket we made to the function so we need to us
 Now we can automate the call of the function so the function is called monthly, since the database needs to be up to date (and also because we can't do more than 20000 request to the rawg API since we use the free version). In order to do this, we put the code in a lambda function with the layer AWSDataWrangler-Python39 and use a trigger made with aws cloudwatch like this:
 
 <br><br><br>
-MONTRER CMNT FAIRE LE CLOUDWQTCH???????
+![database_cleaning_cloudwatch](https://user-images.githubusercontent.com/127619531/226174242-02349720-da20-4b74-be6e-1469ea551d1f.png)
 <br><br><br>
 
 
