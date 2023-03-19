@@ -25,7 +25,7 @@ We can break down the making of the algorithm in 4 parts:<br><br>
 Firstly, we need to find an API to collect the data we will use. In this project, I used the rawg API, you can make your own profile and get your own key to access to the API here: https://rawg.io/apidocs. Now we need to get the data and clean it, here is a part of the code I made to get and clean the data:
 
 <br><br><br>
-METTRE UNE PARTIE DU CODE POUR COMPRENDRE EN VIF CMNT TU CLEAN 
+ ![database_cleaning](https://user-images.githubusercontent.com/127619531/226173410-32b1014c-8a5d-4234-b809-cb721503ecdf.png)
 <br><br><br>
 
 ### 2. Store the data somewhere we can access it:
