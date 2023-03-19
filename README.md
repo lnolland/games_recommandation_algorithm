@@ -1,18 +1,14 @@
 # Games_Recommendation_Algorithm
 
 ## How the project works:
+In this project, I made a game recommandation algorithm using a content-based mode, it means the algorithm doesn't use neural network and use instead a database to find similar results to the input he have. <br><br>
+Here is a diagram explaining in a more simple way how the algorithm works: <br><br>
 ![recommandation_diagram](https://user-images.githubusercontent.com/127619531/226174855-2faee863-542f-4266-a91d-15245510d41f.png)
 
 
 
 ## How the project is made
 ### Introduction:
-In this project, I made a game recommendation algorithm which follow these steps:<br>
-1. The algorithm get the user's inputs
-2. The algorithm access the database we made
-3. The algorithm compare each game in the database to the input
-4. The algorithm assign a score to each game depending of the number of common points they have
-5. The algorithm return the games with the best scores
 
 We can break down the making of the algorithm in 4 parts:<br><br>
 1. Getting the data and clean it
@@ -67,7 +63,7 @@ Finally, we can make our algorithm. We choosed a simple model which works like t
 We get the data from the database, get the user's input and then use the algorithm in order to display the results. Which bring us to the final section:
 
 <br><br><br>
-![result](https://user-images.githubusercontent.com/127619531/226174690-902c89c6-8e12-44a8-ad42-08c84b15fc3c.png)
+![result](https://user-images.githubusercontent.com/127619531/226176732-2c70d68f-1fd9-467a-b757-ba267b7ef228.png)
 <br><br><br>
 
 ## Results
